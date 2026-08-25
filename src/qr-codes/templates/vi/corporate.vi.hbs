@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { background: #020617; color: #f8fafc; font-family: 'Segoe UI', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        
+        .card { background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; width: 100%; max-width: 500px; box-shadow: 0 0 40px rgba(0,0,0,0.6); }
+        
+        .top-accent { height: 4px; background: linear-gradient(90deg, #8e6d2f, #c5a059, #8e6d2f); border-radius: 12px 12px 0 0; }
+        
+        .card-body { padding: 40px 30px; }
+        
+        .event-title { text-align: center; margin-bottom: 30px; }
+        .event-title h1 { color: #c5a059; font-size: 22px; letter-spacing: 2px; }
+        
+        .video-box { position: relative; background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 25px; border: 1px solid #334155; }
+        .video-box video, .video-box img { width: 100%; display: block; }
+
+        .welcome { text-align: center; margin-bottom: 30px; }
+        .welcome p { color: #94a3b8; font-size: 14px; }
+        .welcome h3 { font-size: 20px; margin-top: 5px; color: #fff; }
+
+        .btn-gold { display: block; width: 100%; padding: 16px; background: #c5a059; color: #020617; text-align: center; text-decoration: none; font-weight: 800; border-radius: 6px; margin-bottom: 12px; transition: 0.2s; }
+        .btn-outline { display: block; width: 100%; padding: 16px; border: 1px solid #334155; color: #94a3b8; text-align: center; text-decoration: none; border-radius: 6px; font-size: 14px; }
+        .btn-gold:hover { background: #d4af37; transform: scale(1.02); }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="top-accent"></div>
+        <div class="card-body">
+            <div class="event-title">
+                <h1>{{eventName}}</h1>
+                <p style="font-size: 11px; color: #64748b; margin-top: 5px;">GALA MEDIA GALLERY</p>
+            </div>
+            
+            <div class="video-box">
+                {{#if isVideo}}
+                <video controls preload="auto" poster="{{thumbnailUrl}}">
+                    <source src="{{mediaUrl}}" type="video/mp4">
+                </video>
+                {{else}}
+                <img src="{{mediaUrl}}">
+                {{/if}}
+            </div>
+
+            <div class="welcome">
+                <p>Kính chào quý đối tác</p>
+                <h3>{{guestName}}</h3>
+            </div>
+
+            <a href="{{mediaUrl}}" download class="btn-gold">TẢI VỀ MÁY</a>
+            <a href="{{driveViewUrl}}" target="_blank" class="btn-outline">MỞ TRONG GOOGLE DRIVE</a>
+        </div>
+    </div>
+</body>
+</html>

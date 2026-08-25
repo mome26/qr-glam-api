@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}} - Portfolio</title>
+    <style>
+        :root {
+            --navy: #0f172a;
+            --gold: #c5a059;
+            --cream: #fafafa;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--navy);
+            font-family: 'Times New Roman', Times, serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* The thin gold outer frame */
+        .outer-border {
+            border: 1px solid var(--gold);
+            padding: 15px;
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+        }
+
+        .main-canvas {
+            background-color: var(--cream);
+            padding: 50px 30px;
+            text-align: center;
+        }
+
+        .header-section { margin-bottom: 40px; }
+
+        .header-section h1 {
+            color: var(--navy);
+            font-size: 22px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .line-accent {
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 auto;
+        }
+
+        .media-holder {
+            margin: 40px 0;
+            position: relative;
+            padding: 10px;
+            border: 1px solid #eee;
+        }
+
+        .media-holder video, .media-holder img {
+            width: 100%;
+            display: block;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .guest-caption {
+            margin-bottom: 40px;
+        }
+
+        .guest-caption span {
+            font-family: sans-serif;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .guest-caption h2 {
+            font-size: 32px;
+            color: var(--navy);
+            font-weight: 400;
+            margin-top: 10px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            font-family: sans-serif;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 12px 25px;
+            transition: 0.4s;
+        }
+
+        .btn-dark {
+            background: var(--navy);
+            color: white;
+        }
+
+        .btn-dark:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        .btn-line {
+            border: 1px solid var(--navy);
+            color: var(--navy);
+        }
+
+        .btn-line:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .page-footer {
+            margin-top: 40px;
+            font-family: sans-serif;
+            font-size: 9px;
+            letter-spacing: 2px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="outer-border">
+        <div class="main-canvas">
+            <header class="header-section">
+                <h1>{{eventName}}</h1>
+                <div class="line-accent"></div>
+            </header>
+
+            <div class="guest-caption">
+                <span>Trân trọng gửi đến</span>
+                <h2>{{guestName}}</h2>
+            </div>
+
+            <div class="media-holder">
+                {{#if isVideo}}
+                <video controls preload="auto" poster="{{thumbnailUrl}}">
+                    <source src="{{mediaUrl}}" type="video/mp4">
+                </video>
+                {{else}}
+                <img src="{{mediaUrl}}" alt="{{guestName}}">
+                {{/if}}
+            </div>
+
+            <div class="btn-container">
+                <a href="{{mediaUrl}}" download class="btn btn-dark">Tải về tệp gốc</a>
+                {{#if driveViewUrl}}
+                <a href="{{driveViewUrl}}" target="_blank" class="btn btn-line">Thư viện Drive</a>
+                {{/if}}
+            </div>
+
+            <footer class="page-footer">
+                EST. {{year}} • PHIÊN BẢN GIỚI HẠN
+            </footer>
+        </div>
+    </div>
+
+</body>
+</html>

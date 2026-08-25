@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}}</title>
+    <style>
+        :root { --gold: #c5a059; --navy: #0f172a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #e2e8f0; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 15px; }
+        
+        .container { background: white; width: 100%; max-width: 800px; border-radius: 20px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+        
+        .header { padding: 40px 30px; text-align: center; background: white; }
+        .header h1 { font-size: 24px; text-transform: uppercase; letter-spacing: 2px; color: var(--navy); margin-bottom: 5px; }
+        .header .sub { color: var(--gold); font-weight: bold; font-size: 12px; letter-spacing: 4px; }
+
+        .media-display { width: 100%; background: #000; line-height: 0; position: relative; }
+        .media-display video, .media-display img { width: 100%; height: auto; max-height: 600px; object-fit: contain; }
+        .media-display iframe { width: 100%; height: 450px; border: none; }
+
+        .info-bar { padding: 25px; background: var(--navy); color: white; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--gold); }
+        .info-bar h2 { font-size: 18px; font-weight: 400; }
+        .info-bar h2 span { color: var(--gold); font-weight: 700; }
+
+        .actions { padding: 20px; background: #1e293b; display: flex; gap: 10px; }
+        .btn { flex: 1; padding: 15px; text-align: center; text-decoration: none; font-weight: bold; font-size: 14px; border-radius: 8px; transition: 0.3s; }
+        .btn-primary { background: var(--gold); color: var(--navy); }
+        .btn-secondary { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
+        
+        @media (max-width: 600px) { .info-bar { flex-direction: column; gap: 10px; text-align: center; } .actions { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>{{eventName}}</h1>
+            <div class="sub">HÌNH ẢNH SỰ KIỆN</div>
+        </div>
+        <div class="media-display">
+            {{#if embedUrl}} <iframe src="{{embedUrl}}" allowfullscreen></iframe>
+            {{else if isVideo}} <video controls preload="auto" poster="{{thumbnailUrl}}"><source src="{{mediaUrl}}" type="video/mp4"></video>
+            {{else if mediaUrl}} <img src="{{mediaUrl}}" loading="lazy">
+            {{else}} <div style="padding: 100px; color: white; text-align: center;">📸 Không có dữ liệu</div>
+            {{/if}}
+        </div>
+        <div class="info-bar">
+            <h2>Kính chào, <span>{{guestName}}</span></h2>
+        </div>
+        <div class="actions">
+            <a href="{{#if downloadUrl}}{{downloadUrl}}{{else}}{{mediaUrl}}{{/if}}" download class="btn btn-primary">TẢI XUỐNG NGAY</a>
+            {{#if driveViewUrl}} <a href="{{driveViewUrl}}" target="_blank" class="btn btn-secondary">XEM TRÊN GOOGLE DRIVE</a> {{/if}}
+        </div>
+    </div>
+</body>
+</html>

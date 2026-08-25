@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}} - Kỷ Niệm</title>
+    <style>
+        :root {
+            --silk-navy: #0f172a;
+            --silk-gradient: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+            --accent-gold: #c5a059;
+            --text-light: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #020617;
+            font-family: 'Inter', -apple-system, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-light);
+        }
+
+        .silk-card {
+            background: var(--silk-gradient);
+            width: 100%;
+            max-width: 600px;
+            border-radius: 40px 5px 40px 5px; /* Asymmetric silk-style corners */
+            padding: 50px 30px;
+            text-align: center;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .event-label {
+            display: inline-block;
+            border: 1px solid var(--accent-gold);
+            padding: 5px 15px;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+        }
+
+        .title-group h1 {
+            font-size: 26px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .title-group .guest-highlight {
+            font-weight: 700;
+            color: var(--accent-gold);
+            font-size: 28px;
+            display: block;
+            margin-bottom: 30px;
+        }
+
+        .media-viewer {
+            background: #000;
+            border-radius: 20px 4px 20px 4px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 40px;
+            line-height: 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .media-viewer img, .media-viewer video {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            display: block;
+        }
+
+        .button-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            padding: 14px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-main {
+            background-color: var(--accent-gold);
+            color: var(--silk-navy);
+        }
+
+        .btn-main:hover {
+            transform: scale(1.03);
+            background-color: #d4af37;
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--text-light);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: var(--accent-gold);
+        }
+
+        .footer-small {
+            margin-top: 40px;
+            font-size: 10px;
+            opacity: 0.4;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="silk-card">
+        <div class="event-label">Kỷ niệm sự kiện</div>
+        
+        <div class="title-group">
+            <h1>{{eventName}}</h1>
+            <span class="guest-highlight">{{guestName}}</span>
+        </div>
+
+        <div class="media-viewer">
+            {{#if isVideo}}
+                <video controls preload="auto" poster="{{thumbnailUrl}}">
+                    <source src="{{mediaUrl}}" type="video/mp4">
+                    Trình duyệt không hỗ trợ.
+                </video>
+            {{else}}
+                <img src="{{mediaUrl}}" alt="Kỷ niệm của {{guestName}}">
+            {{/if}}
+        </div>
+
+        <div class="button-stack">
+            <a href="{{mediaUrl}}" download class="btn btn-main">Tải xuống bộ sưu tập</a>
+            {{#if driveViewUrl}}
+            <a href="{{driveViewUrl}}" target="_blank" class="btn btn-outline">Xem trên Google Drive</a>
+            {{/if}}
+        </div>
+
+        <div class="footer-small">
+            TRÂN TRỌNG CẢM ƠN QUÝ KHÁCH | &copy; {{year}}
+        </div>
+    </div>
+
+</body>
+</html>

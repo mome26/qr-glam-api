@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}} - Prism Edition</title>
+    <style>
+        :root {
+            --bg-deep: #020617;
+            --navy-card: #0f172a;
+            --gold-neon: #fde68a;
+            --gold-solid: #c5a059;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(30, 58, 138, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(197, 160, 89, 0.1) 0px, transparent 50%);
+            font-family: 'Inter', sans-serif;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .prism-card {
+            width: 100%;
+            max-width: 500px;
+            background: var(--navy-card);
+            border: 1px solid rgba(253, 230, 138, 0.2);
+            border-radius: 2px; /* Sharp edges for a modern feel */
+            padding: 40px 30px;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* The Neon Gold Corner */
+        .prism-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            right: -1px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, transparent 50%, var(--gold-solid) 50%);
+        }
+
+        .header h1 {
+            font-size: 11px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--gold-solid);
+            margin-bottom: 40px;
+        }
+
+        .media-viewer {
+            position: relative;
+            background: #000;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .media-viewer img, .media-viewer video {
+            width: 100%;
+            display: block;
+            height: auto;
+            max-height: 400px;
+        }
+
+        .content {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .content p {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+
+        .content h2 {
+            font-size: 32px;
+            font-weight: 200;
+            letter-spacing: -1px;
+        }
+
+        .content h2 b {
+            font-weight: 700;
+            color: var(--gold-neon);
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 18px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-gold {
+            background: var(--gold-solid);
+            color: var(--bg-deep);
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-neon);
+            box-shadow: 0 0 20px rgba(253, 230, 138, 0.3);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold-solid);
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 10px;
+            color: #475569;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="prism-card">
+        <div class="header">
+            <h1>{{eventName}}</h1>
+        </div>
+
+        <div class="media-viewer">
+            {{#if isVideo}}
+            <video controls preload="auto" poster="{{thumbnailUrl}}">
+                <source src="{{mediaUrl}}" type="video/mp4">
+            </video>
+            {{else}}
+            <img src="{{mediaUrl}}" alt="Kỷ niệm {{guestName}}">
+            {{/if}}
+        </div>
+
+        <div class="content">
+            <p>XIN CHÀO,</p>
+            <h2>QUÝ KHÁCH <b>{{guestName}}</b></h2>
+        </div>
+
+        <div class="actions">
+            <a href="{{mediaUrl}}" download class="btn btn-gold">TẢI XUỐNG BẢN GỐC</a>
+            {{#if driveViewUrl}}
+            <a href="{{driveViewUrl}}" target="_blank" class="btn btn-outline">TRUY CẬP DRIVE</a>
+            {{/if}}
+        </div>
+
+        <div class="footer">
+            &copy; {{year}} // PHIÊN BẢN PRISM CHUYÊN BIỆT
+        </div>
+    </div>
+
+</body>
+</html>

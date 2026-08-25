@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}} - {{guestName}}</title>
+    <style>
+        :root {
+            --midnight: #0a1128;
+            --brushed-gold: linear-gradient(135deg, #bd9354 0%, #e3c492 50%, #bd9354 100%);
+            --navy-soft: #162242;
+            --off-white: #fcfcfc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--midnight);
+            min-height: 100vh;
+            padding-bottom: 80px; /* Space for sticky footer */
+        }
+
+        /* Brushed Gold Header */
+        .top-banner {
+            background: var(--brushed-gold);
+            height: 6px;
+            width: 100%;
+        }
+
+        .main-header {
+            background: var(--midnight);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            clip-path: ellipse(120% 100% at 50% 0%);
+        }
+
+        .main-header h1 {
+            font-size: 26px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            background: var(--brushed-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .main-header p {
+            font-size: 12px;
+            letter-spacing: 2px;
+            opacity: 0.6;
+        }
+
+        .content-container {
+            max-width: 700px;
+            margin: -30px auto 0;
+            padding: 0 15px;
+        }
+
+        .media-canvas {
+            background: white;
+            padding: 12px;
+            border-radius: 4px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .media-frame {
+            background: #000;
+            line-height: 0;
+            border: 1px solid #eee;
+        }
+
+        .media-frame img, .media-frame video {
+            width: 100%;
+            height: auto;
+            max-height: 550px;
+            display: block;
+        }
+
+        .guest-details {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .guest-details h2 {
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--midnight);
+        }
+
+        .guest-details h2 b {
+            font-weight: 700;
+            color: #8e6d2f;
+        }
+
+        /* Sticky Bottom Actions */
+        .sticky-actions {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px 20px;
+            display: flex;
+            gap: 12px;
+            box-shadow: 0 -10px 25px rgba(0,0,0,0.05);
+            z-index: 100;
+            border-top: 1px solid #eee;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .btn-gold {
+            background: var(--midnight);
+            color: #e3c492;
+            border: 1px solid var(--midnight);
+        }
+
+        .btn-gold:hover {
+            background: #162242;
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--midnight);
+            border: 1px solid var(--midnight);
+        }
+
+        @media (max-width: 600px) {
+            .main-header h1 { font-size: 20px; }
+            .sticky-actions { padding: 10px; gap: 8px; }
+            .btn { font-size: 11px; padding: 12px 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-banner"></div>
+    
+    <header class="main-header">
+        <h1>{{eventName}}</h1>
+        <p>CHƯƠNG TRÌNH LƯU TRỮ KỶ NIỆM</p>
+    </header>
+
+    <div class="content-container">
+        <div class="guest-details">
+            <h2>Kính mời Quý khách <b>{{guestName}}</b></h2>
+        </div>
+
+        <div class="media-canvas">
+            <div class="media-frame">
+                {{#if isVideo}}
+                    <video controls preload="auto" poster="{{thumbnailUrl}}">
+                        <source src="{{mediaUrl}}" type="video/mp4">
+                    </video>
+                {{else}}
+                    <img src="{{mediaUrl}}" alt="Kỷ niệm {{guestName}}" loading="lazy">
+                {{/if}}
+            </div>
+        </div>
+
+        <div style="text-align: center; color: #888; font-size: 12px; margin-bottom: 40px; line-height: 1.8;">
+            Hình ảnh được xử lý và lưu trữ tự động.<br>
+            Quý khách vui lòng tải về để có chất lượng tốt nhất.
+        </div>
+    </div>
+
+    <div class="sticky-actions">
+        <a href="{{mediaUrl}}" download class="btn btn-gold">Tải Xuống Ảnh</a>
+        {{#if driveViewUrl}}
+        <a href="{{driveViewUrl}}" target="_blank" class="btn btn-outline">Thư Viện Ảnh</a>
+        {{/if}}
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}} - Final Edition</title>
+    <style>
+        :root {
+            --slate-black: #020617;
+            --gold-leaf: #c5a059;
+            --slate-gray: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--slate-black);
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+
+        .slate-container {
+            width: 100%;
+            max-width: 850px;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        /* Content Column */
+        .content-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-id {
+            color: var(--gold-leaf);
+            font-size: 11px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .event-id::before { content: ''; width: 30px; height: 1px; background: var(--gold-leaf); }
+
+        .content-col h1 {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .content-col h2 {
+            font-size: 20px;
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .content-col h2 b { color: white; font-weight: 600; }
+
+        /* Media Column */
+        .media-col {
+            position: relative;
+        }
+
+        .media-frame {
+            background: #000;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            padding: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .media-frame video, .media-frame img {
+            width: 100%;
+            display: block;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+        }
+
+        /* Decorative background element */
+        .media-col::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            right: -20px;
+            bottom: -20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            z-index: 1;
+        }
+
+        /* Mobile-Optimized Buttons */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 16px 25px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.4s;
+            border: 1px solid transparent;
+        }
+
+        .btn-gold {
+            background: var(--gold-leaf);
+            color: var(--slate-black);
+        }
+
+        .btn-gold:hover {
+            background: transparent;
+            color: var(--gold-leaf);
+            border-color: var(--gold-leaf);
+        }
+
+        .btn-outline {
+            border-color: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            border-color: white;
+            background: rgba(255,255,255,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .slate-container { grid-template-columns: 1fr; gap: 50px; text-align: center; }
+            .event-id { justify-content: center; }
+            .event-id::before { display: none; }
+            .btn-group { flex-direction: column; }
+            .content-col h1 { font-size: 28px; }
+            .media-col::after { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slate-container">
+        <div class="content-col">
+            <div class="event-id">Media Signature</div>
+            <h1>{{eventName}}</h1>
+            <h2>Kính gửi, <b>{{guestName}}</b></h2>
+            
+            <div class="btn-group">
+                <a href="{{mediaUrl}}" download class="btn btn-gold">Tải về tệp gốc</a>
+                {{#if driveViewUrl}}
+                <a href="{{driveViewUrl}}" target="_blank" class="btn btn-outline">Thư viện tổng</a>
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="media-col">
+            <div class="media-frame">
+                {{#if isVideo}}
+                    <video controls preload="auto" poster="{{thumbnailUrl}}">
+                        <source src="{{mediaUrl}}" type="video/mp4">
+                    </video>
+                {{else}}
+                    <img src="{{mediaUrl}}" alt="Kỷ niệm {{guestName}}">
+                {{/if}}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

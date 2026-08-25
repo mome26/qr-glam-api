@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #fdfbf7; font-family: 'Georgia', serif; padding: 40px 20px; color: #2c3e50; }
+        
+        .container { max-width: 600px; margin: 0 auto; background: white; border: 1px solid #e5e7eb; position: relative; padding: 40px; }
+        /* The "Scroll" border */
+        .container::before { content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px; border: 1px solid #c5a059; pointer-events: none; }
+
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { color: #c5a059; font-size: 28px; font-weight: 400; text-transform: uppercase; margin-bottom: 10px; }
+        .header hr { width: 50px; border: 0; border-top: 2px solid #c5a059; margin: 15px auto; }
+
+        .guest-intro { text-align: center; margin-bottom: 25px; }
+        .guest-intro h2 { font-style: italic; font-weight: 400; font-size: 20px; }
+
+        .media-display { border: 8px solid #f3f4f6; margin-bottom: 30px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); line-height: 0; }
+        .media-display img, .media-display video { width: 100%; height: auto; }
+
+        .actions { display: flex; flex-direction: column; gap: 12px; }
+        .btn { padding: 15px; text-align: center; text-decoration: none; border: 1px solid #c5a059; transition: 0.3s; letter-spacing: 1px; }
+        .btn-primary { background: #c5a059; color: white; }
+        .btn-secondary { color: #c5a059; background: white; }
+        .btn:hover { opacity: 0.8; }
+
+        .footer { margin-top: 30px; text-align: center; font-size: 12px; opacity: 0.6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>{{eventName}}</h1>
+            <hr>
+            <p>KỶ NIỆM KHÔNG PHAI</p>
+        </div>
+        <div class="guest-intro">
+            <h2>Thân mời quý khách, {{guestName}}</h2>
+        </div>
+        <div class="media-display">
+            {{#if isVideo}}
+            <video controls preload="auto" poster="{{thumbnailUrl}}">
+                <source src="{{mediaUrl}}" type="video/mp4">
+            </video>
+            {{else}}
+            <img src="{{mediaUrl}}" loading="lazy">
+            {{/if}}
+        </div>
+        <div class="actions">
+            <a href="{{mediaUrl}}" download class="btn btn-primary">LƯU GIỮ KỶ NIỆM</a>
+            <a href="{{driveViewUrl}}" class="btn btn-secondary">XEM TRÊN DRIVE</a>
+        </div>
+        <div class="footer">© {{year}} {{eventName}}</div>
+    </div>
+</body>
+</html>

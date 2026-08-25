@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}}</title>
+    <style>
+        :root {
+            --midnight: #0a1128;
+            --gold: #c5a059;
+            --white: #ffffff;
+            --grid-line: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #f8fafc;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--midnight);
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .grid-container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--white);
+            border: 1px solid var(--grid-line);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* Top Bar spanning across both columns */
+        .top-cell {
+            grid-column: 1 / span 2;
+            padding: 25px 40px;
+            border-bottom: 1px solid var(--grid-line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-cell h1 {
+            font-size: 14px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        /* Hero Media Cell */
+        .media-cell {
+            grid-column: 1 / span 2;
+            background: #000;
+            line-height: 0;
+            border-bottom: 1px solid var(--grid-line);
+        }
+
+        .media-cell img, .media-cell video {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+        }
+
+        /* Greeting Cell */
+        .greeting-cell {
+            padding: 40px;
+            border-right: 1px solid var(--grid-line);
+        }
+
+        .greeting-cell span {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #94a3b8;
+        }
+
+        .greeting-cell h2 {
+            font-size: 28px;
+            margin-top: 10px;
+            font-weight: 700;
+        }
+
+        /* Action Cell */
+        .action-cell {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 18px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-gold {
+            background: var(--midnight);
+            color: var(--gold);
+        }
+
+        .btn-gold:hover {
+            background: var(--gold);
+            color: var(--midnight);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--grid-line);
+            color: var(--midnight);
+        }
+
+        .btn-outline:hover {
+            background: #f1f5f9;
+        }
+
+        @media (max-width: 650px) {
+            .grid-container { grid-template-columns: 1fr; }
+            .top-cell, .greeting-cell, .action-cell { grid-column: 1; border-right: none; }
+            .greeting-cell { border-bottom: 1px solid var(--grid-line); padding: 30px; }
+            .top-cell h1 { font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-container">
+        <header class="top-cell">
+            <h1>{{eventName}}</h1>
+            <div style="font-size: 10px; opacity: 0.5;">ARCHIVE NO. 17</div>
+        </header>
+
+        <main class="media-cell">
+            {{#if isVideo}}
+                <video controls preload="auto" poster="{{thumbnailUrl}}">
+                    <source src="{{mediaUrl}}" type="video/mp4">
+                </video>
+            {{else}}
+                <img src="{{mediaUrl}}" alt="Event Media">
+            {{/if}}
+        </main>
+
+        <section class="greeting-cell">
+            <span>Kính gửi Quý khách</span>
+            <h2>{{guestName}}</h2>
+        </section>
+
+        <section class="action-cell">
+            <a href="{{mediaUrl}}" download class="btn btn-gold">Tải Tệp Gốc</a>
+            {{#if driveViewUrl}}
+            <a href="{{driveViewUrl}}" target="_blank" class="btn btn-outline">Xem Toàn Bộ Drive</a>
+            {{/if}}
+        </section>
+    </div>
+
+</body>
+</html>

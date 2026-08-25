@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}} - Vinh Danh</title>
+    <style>
+        :root {
+            --midnight: #020617;
+            --navy-glow: #1e293b;
+            --gold-leaf: #d9b36a;
+            --gold-dark: #8e6d2f;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--midnight);
+            background-image: radial-gradient(circle at center, var(--navy-glow) 0%, var(--midnight) 100%);
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 15px;
+        }
+
+        .award-card {
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 1) 100%);
+            width: 100%;
+            max-width: 550px;
+            border: 1px solid rgba(217, 179, 106, 0.3);
+            border-radius: 20px;
+            text-align: center;
+            padding: 40px 20px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        /* Decorative Emblem Header */
+        .emblem {
+            width: 80px;
+            height: 80px;
+            background: var(--midnight);
+            border: 2px solid var(--gold-leaf);
+            border-radius: 50%;
+            margin: -80px auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 0 20px rgba(217, 179, 106, 0.4);
+        }
+
+        .event-header h1 {
+            font-size: 22px;
+            letter-spacing: 3px;
+            color: var(--gold-leaf);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .event-header .divider {
+            height: 1px;
+            width: 100px;
+            background: linear-gradient(90deg, transparent, var(--gold-leaf), transparent);
+            margin: 15px auto;
+        }
+
+        .guest-honor {
+            margin-bottom: 30px;
+        }
+
+        .guest-honor p {
+            font-size: 14px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .guest-honor h2 {
+            font-size: 30px;
+            font-weight: 700;
+            background: linear-gradient(to bottom, #fff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .media-frame {
+            background: #000;
+            border-radius: 12px;
+            border: 1px solid rgba(217, 179, 106, 0.2);
+            padding: 5px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .media-frame video, .media-frame img {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .action-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            padding: 16px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-leaf) 0%, var(--gold-dark) 100%);
+            color: var(--midnight);
+            box-shadow: 0 5px 15px rgba(217, 179, 106, 0.3);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(217, 179, 106, 0.5);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            color: #94a3b8;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold-leaf);
+            color: white;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            font-size: 11px;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="award-card">
+        <div class="emblem">🎖️</div>
+        
+        <div class="event-header">
+            <h1>{{eventName}}</h1>
+            <div class="divider"></div>
+        </div>
+
+        <div class="guest-honor">
+            <p>Trân trọng vinh danh</p>
+            <h2>{{guestName}}</h2>
+        </div>
+
+        <div class="media-frame">
+            {{#if isVideo}}
+            <video controls preload="auto" poster="{{thumbnailUrl}}">
+                <source src="{{mediaUrl}}" type="video/mp4">
+            </video>
+            {{else}}
+            <img src="{{mediaUrl}}" alt="{{guestName}}">
+            {{/if}}
+        </div>
+
+        <div class="action-group">
+            <a href="{{mediaUrl}}" download class="btn btn-gold">Lưu kỷ niệm vinh danh</a>
+            {{#if driveViewUrl}}
+            <a href="{{driveViewUrl}}" target="_blank" class="btn btn-outline">Truy cập thư viện tổng</a>
+            {{/if}}
+        </div>
+
+        <div class="footer-note">
+            Hệ thống ghi nhận hình ảnh tự động &copy; {{year}}
+        </div>
+    </div>
+
+</body>
+</html>

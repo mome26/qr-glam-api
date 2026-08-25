@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}} - Media Archive</title>
+    <style>
+        :root {
+            --navy-dark: #0f172a;
+            --navy-panel: #1e293b;
+            --gold: #c5a059;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #cbd5e1;
+            background-image: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .exhibition-card {
+            width: 100%;
+            max-width: 900px;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 40px 60px -15px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        /* Top Tab Branding */
+        .top-tab {
+            background: var(--navy-dark);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-tab .event-name {
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .top-tab .date {
+            font-size: 11px;
+            opacity: 0.6;
+        }
+
+        /* Hero Media */
+        .display-area {
+            background: #000;
+            line-height: 0;
+            border-bottom: 5px solid var(--gold);
+        }
+
+        .display-area img, .display-area video {
+            width: 100%;
+            max-height: 550px;
+            object-fit: contain;
+        }
+
+        /* Lower Info Section */
+        .info-panel {
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            background: var(--white);
+        }
+
+        .guest-branding h2 {
+            font-size: 14px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .guest-branding .name {
+            font-size: 32px;
+            color: var(--navy-dark);
+            font-weight: 800;
+        }
+
+        .actions-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 15px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--navy-dark);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(197, 160, 89, 0.4);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--navy-dark);
+            color: var(--navy-dark);
+        }
+
+        .btn-outline:hover {
+            background: var(--navy-dark);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .info-panel { flex-direction: column; align-items: flex-start; gap: 30px; padding: 30px; }
+            .actions-right { width: 100%; flex-direction: column; }
+            .btn { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="exhibition-card">
+        <header class="top-tab">
+            <span class="event-name">{{eventName}}</span>
+            <span class="date">EST. {{year}}</span>
+        </header>
+
+        <main class="display-area">
+            {{#if isVideo}}
+                <video controls preload="auto" poster="{{thumbnailUrl}}">
+                    <source src="{{mediaUrl}}" type="video/mp4">
+                </video>
+            {{else}}
+                <img src="{{mediaUrl}}" alt="{{guestName}}">
+            {{/if}}
+        </main>
+
+        <section class="info-panel">
+            <div class="guest-branding">
+                <h2>Kính tặng quý khách</h2>
+                <div class="name">{{guestName}}</div>
+            </div>
+
+            <div class="actions-right">
+                <a href="{{mediaUrl}}" download class="btn btn-gold">Lưu tệp về máy</a>
+                {{#if driveViewUrl}}
+                <a href="{{driveViewUrl}}" target="_blank" class="btn btn-outline">Xem bộ sưu tập</a>
+                {{/if}}
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

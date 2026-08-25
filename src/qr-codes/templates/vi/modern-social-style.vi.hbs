@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}} - Story</title>
+    <style>
+        :root {
+            --navy-dark: #020617;
+            --navy-rich: #0f172a;
+            --gold-glow: #e2b659;
+            --gold-dim: #b38e44;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--navy-dark);
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .billboard-container {
+            width: 100%;
+            max-width: 450px;
+            background: var(--navy-rich);
+            border-radius: 30px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        /* Top Branding */
+        .branding {
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(15,23,42,1), rgba(15,23,42,0));
+            z-index: 10;
+        }
+
+        .branding h1 {
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold-glow);
+        }
+
+        /* Main Media Section */
+        .media-focus {
+            flex-grow: 1;
+            position: relative;
+            background: #000;
+            line-height: 0;
+            min-height: 400px;
+        }
+
+        .media-focus video, .media-focus img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Important for billboard look */
+        }
+
+        /* Gradient Overlay for Guest Name */
+        .guest-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px 25px 20px;
+            background: linear-gradient(to top, var(--navy-rich) 20%, transparent);
+            text-align: left;
+        }
+
+        .guest-overlay span {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold-glow);
+            opacity: 0.9;
+        }
+
+        .guest-overlay h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-top: 5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Interaction Footer */
+        .footer-actions {
+            padding: 20px 25px 35px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .btn-story {
+            padding: 16px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            text-align: center;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn-gold {
+            background: var(--gold-glow);
+            color: var(--navy-dark);
+        }
+
+        .btn-outline {
+            background: rgba(255,255,255,0.05);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-story:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        @media (max-height: 700px) {
+            .guest-overlay h2 { font-size: 24px; }
+            .media-focus { min-height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="billboard-container">
+        <header class="branding">
+            <h1>{{eventName}}</h1>
+        </header>
+
+        <main class="media-focus">
+            {{#if isVideo}}
+                <video controls preload="auto" poster="{{thumbnailUrl}}" playsinline>
+                    <source src="{{mediaUrl}}" type="video/mp4">
+                </video>
+            {{else}}
+                <img src="{{mediaUrl}}" alt="Kỷ niệm của {{guestName}}">
+            {{/if}}
+
+            <div class="guest-overlay">
+                <span>Dành riêng cho quý khách</span>
+                <h2>{{guestName}}</h2>
+            </div>
+        </main>
+
+        <footer class="footer-actions">
+            <a href="{{mediaUrl}}" download class="btn-story btn-gold">Tải Về Máy</a>
+            {{#if driveViewUrl}}
+            <a href="{{driveViewUrl}}" target="_blank" class="btn-story btn-outline">Thư Viện Ảnh</a>
+            {{/if}}
+        </footer>
+    </div>
+
+</body>
+</html>

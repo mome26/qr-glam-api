@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}} - {{guestName}}</title>
+    <style>
+        :root {
+            --midnight: #0a0e1a;
+            --gold-leaf: #d4af37;
+            --off-white: #f8fafc;
+            --border-gold: rgba(212, 175, 55, 0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--midnight);
+            /* Subtle texture effect */
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+            font-family: 'Inter', -apple-system, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .outer-frame {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border: 1px solid var(--border-gold);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 650px;
+            position: relative;
+        }
+
+        .inner-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .card-header {
+            padding: 40px 30px 20px;
+            text-align: center;
+        }
+
+        .card-header .event-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold-leaf);
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .card-header h1 {
+            color: var(--midnight);
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .media-container {
+            padding: 0 30px;
+            margin-bottom: 30px;
+        }
+
+        .media-box {
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            line-height: 0;
+            border: 1px solid #eee;
+        }
+
+        .media-box video, .media-box img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+        }
+
+        .guest-section {
+            background: var(--off-white);
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #edf2f7;
+        }
+
+        .guest-section h2 {
+            font-size: 15px;
+            color: #64748b;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .guest-section .name {
+            font-size: 22px;
+            color: var(--midnight);
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .action-flex {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-gold {
+            background: var(--midnight);
+            color: var(--gold-leaf);
+            border: 1px solid var(--midnight);
+        }
+
+        .btn-gold:hover {
+            background: #1a2333;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--midnight);
+            border: 1px solid #cbd5e1;
+        }
+
+        .btn-outline:hover {
+            background: #fff;
+            border-color: var(--gold-leaf);
+        }
+
+        .footer-credit {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 10px;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 480px) {
+            .action-flex { flex-direction: column; }
+            .card-header h1 { font-size: 20px; }
+            .outer-frame { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="outer-frame">
+        <div class="inner-card">
+            <header class="card-header">
+                <span class="event-tag">Kỷ Niệm Đặc Biệt</span>
+                <h1>{{eventName}}</h1>
+            </header>
+
+            <div class="media-container">
+                <div class="media-box">
+                    {{#if isVideo}}
+                        <video controls preload="auto" poster="{{thumbnailUrl}}">
+                            <source src="{{mediaUrl}}" type="video/mp4">
+                        </video>
+                    {{else}}
+                        <img src="{{mediaUrl}}" alt="Kỷ niệm {{guestName}}">
+                    {{/if}}
+                </div>
+            </div>
+
+            <div class="guest-section">
+                <h2>Trân trọng dành cho</h2>
+                <div class="name">{{guestName}}</div>
+
+                <div class="action-flex">
+                    <a href="{{mediaUrl}}" download class="btn btn-gold">
+                        Tải xuống máy
+                    </a>
+                    {{#if driveViewUrl}}
+                    <a href="{{driveViewUrl}}" target="_blank" class="btn btn-outline">
+                        Xem trên Drive
+                    </a>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-credit">
+            © {{year}} {{eventName}} • Design No. 11
+        </div>
+    </div>
+
+</body>
+</html>

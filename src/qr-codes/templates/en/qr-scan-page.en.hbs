@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}} - Guest Media</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .guest-info {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+        
+        .guest-info h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+        
+        .guest-info p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .media-container {
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .media-display {
+            margin-bottom: 30px;
+        }
+        
+        .media-display img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            max-height: 400px;
+            object-fit: cover;
+        }
+        
+        .media-display video {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            max-height: 400px;
+        }
+        
+        .media-display iframe {
+            max-width: 100%;
+            width: 100%;
+            height: 480px;
+            border-radius: 8px;
+            border: none;
+        }
+        
+        .placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 60px 20px;
+            color: #999;
+            text-align: center;
+        }
+        
+        .placeholder-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .placeholder-text {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .actions {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+        
+        .footer {
+            padding: 20px;
+            background: #f9f9f9;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .guest-info h2 {
+                font-size: 18px;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Event Branding -->
+        <div class="header">
+            <h1>{{eventName}}</h1>
+            <p>Guest Media Gallery</p>
+        </div>
+        
+        <!-- Guest Info -->
+        {{#if guestName}}
+        <div class="guest-info">
+            <h2>Welcome, {{guestName}}!</h2>
+            <p>Here's your personalized media</p>
+        </div>
+        {{/if}}
+        
+        <!-- Media Content -->
+        <div class="media-container">
+            <div class="media-display">
+                {{#if embedUrl}}
+                    <!-- T011: Video via Google Drive iframe -->
+                    <iframe src="{{embedUrl}}" allow="autoplay" allowfullscreen></iframe>
+                {{else if isVideo}}
+                    <!-- Fallback: video tag (may not work for large files) -->
+                    <video controls preload="metadata"{{#if thumbnailUrl}} poster="{{thumbnailUrl}}"{{/if}}>
+                        <source src="{{mediaUrl}}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                {{else if mediaUrl}}
+                    <!-- T011: Image display -->
+                    <img src="{{mediaUrl}}" alt="Guest media for {{guestName}}" loading="lazy">
+                {{else}}
+                <div class="placeholder">
+                    <div class="placeholder-icon">📷</div>
+                    <div class="placeholder-text">Media Not Available</div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+        
+        <!-- Actions -->
+        <div class="actions">
+            {{#if downloadUrl}}
+            <!-- T012: Use downloadUrl instead of mediaUrl for downloads -->
+            <a href="{{downloadUrl}}" download class="btn btn-primary">Download</a>
+            {{else if mediaUrl}}
+            <a href="{{mediaUrl}}" download class="btn btn-primary">Download</a>
+            {{/if}}
+            {{#if driveViewUrl}}
+            <a href="{{driveViewUrl}}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Open in Drive</a>
+            {{/if}}
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; {{year}} {{eventName}}. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

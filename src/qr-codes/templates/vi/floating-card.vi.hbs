@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}} - Media Center</title>
+    <style>
+        :root {
+            --deep-bg: #f0f2f5;
+            --navy-main: #1e293b;
+            --gold-accent: #c5a059;
+            --card-white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--deep-bg);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .base-card {
+            background: var(--navy-main);
+            width: 100%;
+            max-width: 600px;
+            border-radius: 24px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 60px; /* Space for the floating media */
+        }
+
+        /* Floating Media Container */
+        .floating-media {
+            width: 90%;
+            margin: -60px auto 0;
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 4px solid var(--card-white);
+            line-height: 0;
+        }
+
+        .floating-media img, .floating-media video {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+        }
+
+        .card-content {
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .card-content h1 {
+            color: var(--gold-accent);
+            font-size: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .guest-tag {
+            background: rgba(197, 160, 89, 0.1);
+            border: 1px solid var(--gold-accent);
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 50px;
+            color: var(--gold-accent);
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .welcome-msg {
+            font-size: 15px;
+            color: #94a3b8;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        .btn-stack {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary {
+            background: var(--gold-accent);
+            color: var(--navy-main);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background: #d4af37;
+            box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: white;
+        }
+
+        .footer-text {
+            padding: 25px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.3);
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        @media (max-width: 480px) {
+            .btn-stack { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="base-card">
+        <div class="floating-media">
+            {{#if isVideo}}
+                <video controls preload="auto" poster="{{thumbnailUrl}}">
+                    <source src="{{mediaUrl}}" type="video/mp4">
+                </video>
+            {{else}}
+                <img src="{{mediaUrl}}" alt="Kỷ niệm {{guestName}}">
+            {{/if}}
+        </div>
+
+        <div class="card-content">
+            <h1>{{eventName}}</h1>
+            <div class="guest-tag">Khách mời: {{guestName}}</div>
+            
+            <p class="welcome-msg">
+                Cảm ơn Quý khách đã dành thời gian quý báu tham dự sự kiện. 
+                Dưới đây là hình ảnh kỷ niệm được hệ thống tự động ghi lại.
+            </p>
+
+            <div class="btn-stack">
+                <a href="{{mediaUrl}}" download class="btn btn-primary">Lưu hình ảnh</a>
+                {{#if driveViewUrl}}
+                <a href="{{driveViewUrl}}" target="_blank" class="btn btn-outline">Xem trên Drive</a>
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="footer-text">
+            © {{year}} {{eventName}} - Cung cấp bởi Ban Tổ Chức
+        </div>
+    </div>
+
+</body>
+</html>

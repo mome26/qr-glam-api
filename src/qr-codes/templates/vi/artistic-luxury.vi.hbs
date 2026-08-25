@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}} - Portfolio</title>
+    <style>
+        :root {
+            --paper-white: #ffffff;
+            --accent-gold: #c5a059;
+            --deep-navy: #0f172a;
+            --line-color: #e5e7eb;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--paper-white);
+            font-family: 'Times New Roman', Times, serif; /* Classic elegant serif */
+            color: var(--deep-navy);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .gallery-wrapper {
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+        }
+
+        /* Minimal Header Section */
+        .brand-header {
+            border-bottom: 1px solid var(--line-color);
+            padding-bottom: 20px;
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .brand-header h1 {
+            font-size: 24px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+        }
+
+        .brand-header span {
+            font-size: 11px;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Media Focus Area */
+        .media-stage {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .media-stage video, .media-stage img {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+            display: block;
+            background: #fafafa;
+        }
+
+        .media-stage iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+
+        /* Descriptive Text */
+        .meta-description {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid var(--line-color);
+        }
+
+        .meta-description .guest-name {
+            font-size: 32px;
+            line-height: 1;
+            font-weight: 400;
+        }
+
+        .meta-description .guest-name span {
+            display: block;
+            font-size: 14px;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            font-family: sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .meta-description .short-message {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #64748b;
+            font-family: sans-serif;
+        }
+
+        /* Clean Interaction Bar */
+        .interaction-bar {
+            padding: 40px 0;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            font-family: sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--deep-navy);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 600px) {
+            .brand-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .meta-description { grid-template-columns: 1fr; gap: 20px; }
+            .brand-header h1 { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gallery-wrapper">
+        <header class="brand-header">
+            <h1>{{eventName}}</h1>
+            <span>Bộ sưu tập độc bản</span>
+        </header>
+
+        <section class="media-stage">
+            {{#if isVideo}}
+                <video controls preload="auto" poster="{{thumbnailUrl}}">
+                    <source src="{{mediaUrl}}" type="video/mp4">
+                    Trình duyệt không hỗ trợ xem video.
+                </video>
+            {{else if mediaUrl}}
+                <img src="{{mediaUrl}}" alt="Kỷ niệm {{guestName}}">
+            {{/if}}
+        </section>
+
+        <section class="meta-description">
+            <div class="guest-name">
+                <span>Dành cho</span>
+                {{guestName}}
+            </div>
+            <div class="short-message">
+                Những khoảnh khắc chân thực nhất được ghi lại trong không gian sang trọng của sự kiện. Chúng tôi hy vọng đây sẽ là những kỷ niệm đẹp đồng hành cùng quý khách.
+            </div>
+        </section>
+
+        <nav class="interaction-bar">
+            <a href="{{mediaUrl}}" download class="nav-link">Tải về máy (.jpg / .mp4)</a>
+            {{#if driveViewUrl}}
+            <a href="{{driveViewUrl}}" target="_blank" class="nav-link">Thư viện Google Drive</a>
+            {{/if}}
+        </nav>
+
+        <footer style="font-size: 10px; color: #cbd5e1; margin-top: 40px; letter-spacing: 2px;">
+            DESIGNED FOR THE EXCLUSIVE GUESTS OF {{eventName}} | {{year}}
+        </footer>
+    </div>
+
+</body>
+</html>

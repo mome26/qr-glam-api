@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}} - Gallery</title>
+    <style>
+        :root {
+            --navy-bg: #020617;
+            --gold: #c5a059;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--navy-bg);
+            /* Gradient glow in background */
+            background-image: radial-gradient(circle at 10% 20%, rgba(197, 160, 89, 0.05) 0%, transparent 40%),
+                              radial-gradient(circle at 90% 80%, rgba(30, 58, 138, 0.2) 0%, transparent 40%);
+            font-family: 'Inter', sans-serif;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .glass-wrapper {
+            width: 100%;
+            max-width: 850px;
+        }
+
+        /* Frosted Header */
+        .glass-header {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .glass-header h1 {
+            font-size: 22px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .guest-chip {
+            background: rgba(197, 160, 89, 0.15);
+            border: 1px solid var(--gold);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        /* Media Area */
+        .glass-body {
+            background: var(--glass);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 24px;
+        }
+
+        .video-side {
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            line-height: 0;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .video-side video, .video-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .info-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-side h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .info-side p {
+            color: #94a3b8;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--navy-bg);
+        }
+
+        .btn-gold:hover {
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--glass-border);
+            color: #fff;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .glass-header { flex-direction: column; gap: 20px; text-align: center; }
+            .glass-body { grid-template-columns: 1fr; }
+            .info-side { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glass-wrapper">
+        <header class="glass-header">
+            <h1>{{eventName}}</h1>
+            <div class="guest-chip">VIP GUEST</div>
+        </header>
+
+        <main class="glass-body">
+            <div class="video-side">
+                {{#if isVideo}}
+                    <video controls preload="auto" poster="{{thumbnailUrl}}">
+                        <source src="{{mediaUrl}}" type="video/mp4">
+                    </video>
+                {{else}}
+                    <img src="{{mediaUrl}}" alt="Media">
+                {{/if}}
+            </div>
+
+            <div class="info-side">
+                <h2>Xin chào, <br><b>{{guestName}}</b></h2>
+                <p>Cảm ơn Quý khách đã đồng hành cùng chúng tôi. Trân trọng gửi đến Quý khách những khoảnh khắc được lưu lại.</p>
+                
+                <div class="btn-group">
+                    <a href="{{mediaUrl}}" download class="btn btn-gold">Tải xuống chất lượng cao</a>
+                    {{#if driveViewUrl}}
+                    <a href="{{driveViewUrl}}" target="_blank" class="btn btn-outline">Xem bộ sưu tập đầy đủ</a>
+                    {{/if}}
+                </div>
+            </div>
+        </main>
+
+        <footer style="text-align: center; margin-top: 30px; font-size: 11px; color: #475569;">
+            {{year}} © DIGITAL MEDIA HUB | {{eventName}}
+        </footer>
+    </div>
+
+</body>
+</html>

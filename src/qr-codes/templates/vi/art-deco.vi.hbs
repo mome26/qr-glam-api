@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{eventName}} - Kỷ Niệm</title>
+    <style>
+        :root {
+            --midnight: #0f172a;
+            --gold: #c5a059;
+            --dark-gold: #8e6d2f;
+            --off-white: #fefcf8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--midnight);
+            font-family: 'Segoe UI', serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .art-deco-container {
+            background: var(--off-white);
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            position: relative;
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 0 10px var(--midnight), 0 0 0 12px var(--gold);
+        }
+
+        /* Deco Corner Accents */
+        .deco-corner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--dark-gold);
+        }
+
+        .top-left {
+            top: 10px;
+            left: 10px;
+            border-right: 0;
+            border-bottom: 0;
+        }
+
+        .top-right {
+            top: 10px;
+            right: 10px;
+            border-left: 0;
+            border-bottom: 0;
+        }
+
+        .bottom-left {
+            bottom: 10px;
+            left: 10px;
+            border-right: 0;
+            border-top: 0;
+        }
+
+        .bottom-right {
+            bottom: 10px;
+            right: 10px;
+            border-left: 0;
+            border-top: 0;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: var(--midnight);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        .deco-line {
+            height: 2px;
+            background: repeating-linear-gradient(90deg, var(--gold), var(--gold) 4px, transparent 4px, transparent 8px);
+            width: 60%;
+            margin: 0 auto;
+        }
+
+        .media-frame {
+            background: var(--midnight);
+            padding: 8px;
+            border: 1px solid var(--gold);
+            margin-bottom: 30px;
+            line-height: 0;
+            clip-path: polygon(5% 0, 95% 0, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0 95%, 0 5%);
+        }
+
+        .media-frame img,
+        .media-frame video {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        /* Placeholder Design - Fixed Stacking and Alignment */
+        .no-media-placeholder {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            display: flex;
+            align-items: center;
+            /* Vertically centers the content block */
+            justify-content: center;
+            /* Horizontally centers the content block */
+            background: linear-gradient(135deg, #1e293b 0%, var(--midnight) 100%);
+            color: var(--gold);
+            text-align: center;
+            padding: 40px;
+            border: 1px inset var(--dark-gold);
+        }
+
+        .placeholder-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 300px;
+            /* Standardize text width */
+        }
+
+        .placeholder-content h3 {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: 15px;
+            /* Spacing between title and diamond */
+        }
+
+        .diamond-icon {
+            font-size: 24px;
+            color: var(--gold);
+            animation: pulse 3s infinite ease-in-out;
+            margin-bottom: 20px;
+            /* Pushes the body text down from the diamond */
+            line-height: 1;
+        }
+
+        .placeholder-content p {
+            font-size: 11px;
+            opacity: 0.7;
+            line-height: 1.8;
+            /* Increased line height for clear separation */
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: scale(0.9);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        .guest-invite {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .guest-invite p {
+            font-size: 13px;
+            text-transform: uppercase;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .guest-invite h2 {
+            font-size: 26px;
+            color: var(--midnight);
+            font-weight: 300;
+        }
+
+        .btn-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-gold {
+            background: var(--midnight);
+            color: var(--gold);
+            border: 1px solid var(--midnight);
+        }
+
+        .btn-gold:hover {
+            background: var(--dark-gold);
+            color: white;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--midnight);
+            border: 1px solid var(--gold);
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 10px;
+            color: #999;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="art-deco-container">
+        <div class="deco-corner top-left"></div>
+        <div class="deco-corner top-right"></div>
+        <div class="deco-corner bottom-left"></div>
+        <div class="deco-corner bottom-right"></div>
+
+        <div class="header">
+            <h1>{{eventName}}</h1>
+            <div class="deco-line"></div>
+        </div>
+
+        <div class="guest-invite">
+            <p>Trân trọng gửi tới</p>
+            <h2>{{guestName}}</h2>
+        </div>
+
+        <div class="media-frame">
+            {{#if embedUrl}}
+            <iframe src="{{embedUrl}}" allow="autoplay" allowfullscreen
+                style="width:100%;aspect-ratio:16/9;border:none;"></iframe>
+            {{else if isVideo}}
+            <video controls preload="auto" {{#if thumbnailUrl}} poster="{{thumbnailUrl}}" {{/if}}>
+                <source src="{{mediaUrl}}" type="video/mp4">
+            </video>
+            {{else}}
+            {{#if mediaUrl}}
+            <img src="{{mediaUrl}}" alt="Kỷ niệm {{guestName}}">
+            {{else}}
+            <div class="no-media-placeholder">
+                <div class="placeholder-content">
+                    <h3>Khoảnh Khắc Đang Chờ</h3>
+                    <div class="diamond-icon">◆</div>
+                    <p>Hình ảnh kỷ niệm hiện đang được chuẩn bị.<br>Vui lòng quay lại sau.</p>
+                </div>
+            </div>
+            {{/if}}
+            {{/if}}
+        </div>
+
+        <div class="btn-stack">
+            {{#if mediaUrl}}
+            <a href="{{mediaUrl}}" download class="btn btn-gold">Lưu trữ hình ảnh</a>
+            {{/if}}
+
+            {{#if driveViewUrl}}
+            <a href="{{driveViewUrl}}" target="_blank" class="btn btn-white">Xem thư viện đầy đủ</a>
+            {{/if}}
+        </div>
+
+        <div class="footer">
+            &copy; {{year}} {{eventName}} | QUÝ TỘC & SANG TRỌNG
+        </div>
+    </div>
+
+</body>
+
+</html>
